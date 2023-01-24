@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
+const authRoute = require("./routes/Auth")
 
 dotenv.config()
 
@@ -19,10 +20,10 @@ const port = 5000
 const feedback =()=>{
  console.log('Server is Running! on '+ port)
 }
-app.use(cors())
+app.use(cors()) 
 app.use(express.json())
 // app.use("/api/users",userRoute)
-// app.use("/api/auth",authRoute)
+app.use("/api/auth",authRoute)
 // app.use("/api/product",productRoute)
 // app.use("/api/carts",cartRoute)
 // app.use("/api/orders",orderRoute) 
