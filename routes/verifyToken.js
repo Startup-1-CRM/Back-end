@@ -5,7 +5,7 @@ const verifyToken =(req,res,next)=>{
     if(authHeader){
         const token=authHeader.split(" ")[1]
         jwt.verify(token,process.env.JWT_SEC,(err,user)=>{
-            if(err) res.status(403).json("Tokrn not valid")
+            if(err) res.status(403).json("Token not valid")
             req.user=user
             next()
         })
@@ -21,7 +21,7 @@ const verifyTokenandAuthorization =(req,res,next)=>{
         if(req.user.id === req.params.id || req.user.isAdmin){
             next()
         }else{
-            res.status(401).json("You are not Allow")
+            res.status(401).json("You are not Allow") 
         }
     })
    
@@ -34,7 +34,7 @@ const verifyTokenandAdmin =(req,res,next)=>{
         if(req.user.isAdmin){
             next()
         }else{
-            res.status(401).json("You are not am Admin")
+            res.status(401).json("You are not an Admin")
         }
     })
    

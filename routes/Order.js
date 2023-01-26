@@ -1,5 +1,5 @@
 const router = require("express").Router()
-const Order = require("../models/Order")
+const Order = require("../models/Sales_Order")
 const {verifyTokenandAuthorization,
         verifyToken,
         verifyTokenandAdmin 
@@ -21,28 +21,6 @@ const {verifyTokenandAuthorization,
 })
 
 
-
-
-
-//UPDATE
-router.put("/:id",verifyTokenandAdmin, async(req,res)=>{
-    
-    try{
-        const updatedorder = await Order.findByIdAndUpdate(req.params.id,
-            {
-            $set:req.body
-        },
-        {new:true}
-        )
-        res.status(200).json(updatedorder)
-    }catch(err){
-        res.status(500).json(err)
-    }
-})
-
-
-
-
  //DELETE
 router.delete("/:id",verifyTokenandAdmin, async(req,res)=>{
     
@@ -55,16 +33,7 @@ router.delete("/:id",verifyTokenandAdmin, async(req,res)=>{
 })
 
 
-//GET USER CART
-router.get("/find/:userId",verifyTokenandAuthorization, async(req,res)=>{
-    try{
-       const orders= await Order.find({userId:req.body.params.userId})
-    
-        res.status(200).json(cart)
-    }catch(err){
-        res.status(500).json(err)
-    }
-})
+
 
 
  //GET ALL 
@@ -79,35 +48,6 @@ router.get("/",verifyTokenandAdmin, async(req,res)=>{
     }
 })
 
-
-//GET MONTHLY INCOME
-router.get("/income",verifyTokenandAdmin, async(req,res)=>{
-    const date = new Date()
-    const lastMonth = new Date(date.setMonth(date.getMonth()-1))
-    const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth()-1))
-    try{
-      const income = await Order.aggregate([
-        {$match:{createdAt:{$gte:previousMonth}}},
-      {  
-        $project: {
-            month:{$month:"$createdAt"},
-            sales:"$amount",
-        },
-        
-     },
-     {
-            $group:{
-                _id: "$month",
-                total:{$sum:"$sales"} 
-            }
-        }
-      ])
-   
-        res.status(200).json(income)
-    }catch(err){
-        res.status(500).json(err)
-    }
-})
 
 
 

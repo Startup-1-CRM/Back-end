@@ -4,6 +4,9 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
 const authRoute = require("./routes/Auth")
+const userRoute = require("./routes/Users")
+const productRoute = require("./routes/Product")
+const orderRoute = require("./routes/Order")
 
 dotenv.config()
 
@@ -22,11 +25,11 @@ const feedback =()=>{
 }
 app.use(cors()) 
 app.use(express.json())
-// app.use("/api/users",userRoute)
+app.use("/api/users",userRoute)
 app.use("/api/auth",authRoute)
-// app.use("/api/product",productRoute)
+app.use("/api/product",productRoute)
 // app.use("/api/carts",cartRoute)
-// app.use("/api/orders",orderRoute) 
+app.use("/api/orders",orderRoute) 
 // app.use("/api/checkout",stripeRoute)  
 
  
