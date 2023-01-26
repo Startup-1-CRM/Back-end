@@ -7,6 +7,7 @@ const authRoute = require("./routes/Auth")
 const userRoute = require("./routes/Users")
 const productRoute = require("./routes/Product")
 const orderRoute = require("./routes/Order")
+const SupportRequestsRoute = require("./routes/SupportRequests")
 
 dotenv.config()
 
@@ -28,7 +29,7 @@ app.use(express.json())
 app.use("/api/users",userRoute)
 app.use("/api/auth",authRoute)
 app.use("/api/product",productRoute)
-// app.use("/api/carts",cartRoute)
+app.use("/api/supportrequests",SupportRequestsRoute)
 app.use("/api/orders",orderRoute) 
 // app.use("/api/checkout",stripeRoute)  
 
