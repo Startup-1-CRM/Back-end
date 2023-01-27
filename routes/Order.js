@@ -13,9 +13,9 @@ const {verifyTokenandAuthorization,
     const newOrder = new Order(req.body)
     try{ 
           const saveOrder= await newOrder.save()
-         res.status(200).json(saveOrder)
+         res.json(saveOrder)
     }catch(err){
-        res.status(500).json(err) 
+        res.json(err) 
     }
     
 })
@@ -26,9 +26,9 @@ router.delete("/:id",verifyTokenandAdmin, async(req,res)=>{
     
     try{
        await Order.findByIdAndDelete(req.params.id)
-         res.status(200).json("Order has been deleted")
+         res.json("Order has been deleted")
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -42,9 +42,9 @@ router.get("/",verifyTokenandAdmin, async(req,res)=>{
     try{
          const orders= await Order.find()
    
-        res.status(200).json(orders)
+        res.json(orders)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 

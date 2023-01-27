@@ -17,9 +17,9 @@ router.put("/:id",verifyTokenandAuthorization, async(req,res)=>{
         },
         {new:true}
         )
-        res.status(200).json(updateduser)
+        res.json(updateduser)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -31,9 +31,9 @@ router.delete("/:id",verifyTokenandAuthorization, async(req,res)=>{
     
     try{
        await User.findByIdAndDelete(req.params.id)
-         res.status(200).json("User has been deleted")
+         res.json("User has been deleted")
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -44,9 +44,9 @@ router.get("/find/:id",verifyTokenandAdmin, async(req,res)=>{
        const user= await User.findById(req.params.id)
         const {password,...others} = user._doc
    
-        res.status(200).json(others)
+        res.json(others)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -58,9 +58,9 @@ router.get("/",verifyTokenandAdmin, async(req,res)=>{
        const users= query? await User.find().sort({_id:-1}).limit(1) 
        : await User.find()
    
-        res.status(200).json(users)
+        res.json(users)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 

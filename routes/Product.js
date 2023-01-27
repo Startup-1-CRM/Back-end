@@ -13,9 +13,9 @@ const {verifyTokenandAuthorization,
     const newProduct = new Product(req.body)
     try{ 
           const saveProduct= await newProduct.save()
-         res.status(200).json(saveProduct)
+         res.json(saveProduct)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
   
 })
@@ -34,9 +34,9 @@ router.put("/:id",verifyTokenandAdmin, async(req,res)=>{
         },
         {new:true}
         )
-        res.status(200).json(updatedproduct)
+        res.json(updatedproduct)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -48,9 +48,9 @@ router.delete("/:id",verifyTokenandAuthorization, async(req,res)=>{
     
     try{
        await Product.findByIdAndDelete(req.params.id)
-         res.status(200).json("Product has been deleted")
+         res.json("Product has been deleted")
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -60,9 +60,9 @@ router.get("/find/:id",async(req,res)=>{
     try{
        const product= await Product.findById(req.params.id)
     
-        res.status(200).json(product)
+        res.json(product)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -87,9 +87,9 @@ router.get("/",async(req,res)=>{
         }
       
    
-        res.status(200).json(products )
+        res.json(products )
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 

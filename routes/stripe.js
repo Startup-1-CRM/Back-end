@@ -10,9 +10,9 @@ router.put("/payment",verifyTokenandAuthorization, async(req,res)=>{
         currency:"USD"
     },(stripeErr,stripeRes)=>{
         if(stripeErr){
-             res.status(500).json(stripeErr)
+             res.json(stripeErr)
         }else{
-            res.status(200).json(stripeRes)
+            res.json(stripeRes)
         }
     })
    

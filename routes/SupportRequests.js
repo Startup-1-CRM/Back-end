@@ -13,9 +13,9 @@ const {verifyTokenandAuthorization,
     const newSupportRequests = new SupportRequests(req.body)
     try{ 
           const saveCart= await newSupportRequests.save()
-         res.status(200).json(saveCart)
+         res.json(saveCart)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
   
 })
@@ -33,9 +33,9 @@ router.delete("/:id",verifyTokenandAdmin, async(req,res)=>{
     
     try{
        await SupportRequests.findByIdAndDelete(req.params.id)
-         res.status(200).json("Cart has been deleted")
+         res.json("Cart has been deleted")
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
@@ -49,9 +49,9 @@ router.get("/",verifyTokenandAdmin, async(req,res)=>{
     try{
          const SupportRequests= await support_requests.find()
    
-        res.status(200).json(SupportRequests)
+        res.json(SupportRequests)
     }catch(err){
-        res.status(500).json(err)
+        res.json(err)
     }
 })
 
